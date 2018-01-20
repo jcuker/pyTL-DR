@@ -8,9 +8,6 @@ import webbrowser
 
 class ArticleInformation(object):
 
-    # member variables
-    # title, url, content, author, imageUrl, publishedAt
-
     summarizedContent = None
 
     def __init__(self, title, url, content, author, imageUrl, publishedAt, source):
@@ -71,7 +68,7 @@ def initKeys():
 
     return
 
-def NewsAPIGetAsJSON(country, apiKey, articleCategory = ''):
+def NewsAPIGetAsJSON(country, apiKey, articleCategory = 'general'):
     # example response:
     #{
     #   "status": "ok",
@@ -79,13 +76,14 @@ def NewsAPIGetAsJSON(country, apiKey, articleCategory = ''):
     #   "articles": [ … ]
     #}
 
-    if articleCategory == '':
-        articleCategory = 'general'
-    
     # pageSize of 10 is a limitation of the SMMRY API see here: http://smmry.com/api
-    newsAPIRequest = requests.get('https://newsapi.org/v2/top-headlines?country=' + country + '&category=' + articleCategory + '&pageSize=10' + '&apiKey=' + apiKey)
+    newsAPIRequest = requests.get(
+        'https://newsapi.org/v2/top-headlines?country=' + country 
+        + '&category=' + articleCategory 
+        + '&pageSize=10' 
+        + '&apiKey=' + apiKey
+        )
     newsAPIJson = json.loads(newsAPIRequest.text)
-    # print(newsAPIJson["articles"][0]["description"])
     return newsAPIJson
 
 def NewsAPIGetAsJSONviaSource(source, apiKey):
@@ -97,7 +95,11 @@ def NewsAPIGetAsJSONviaSource(source, apiKey):
     #}
 
     # pageSize of 10 is a limitation of the SMMRY API see here: http://smmry.com/api
-    newsAPIRequest = requests.get('https://newsapi.org/v2/top-headlines?source=' + source + '&pageSize=10' + '&apiKey=' + apiKey)
+    newsAPIRequest = requests.get(
+        'https://newsapi.org/v2/top-headlines?source=' + source 
+        + '&pageSize=10' 
+        + '&apiKey=' + apiKey
+        )
     newsAPIJson = json.loads(newsAPIRequest.text)
     return newsAPIJson
 
@@ -110,7 +112,10 @@ def SmmryAPIGet(urlToSend, apiKey, numberOfSentences = '7'):
     #   'sm_api_limitation': 'Waited 0 extra seconds due to API Free mode, 98 requests left to make for today.'
     #}
 
-    url = 'http://api.smmry.com/?SM_API_KEY=' + apiKey + '&SM_LENGTH=' + numberOfSentences + '&SM_URL=' + urlToSend
+    url = 'http://api.smmry.com/?SM_API_KEY=' + apiKey 
+    + '&SM_LENGTH=' + numberOfSentences 
+    + '&SM_URL=' + urlToSend
+
     smmryRequest = requests.get(url)
     smmryJSON = json.loads(smmryRequest.text)
     return smmryJSON
@@ -120,13 +125,20 @@ def GetArticleInformationList():
     articleInformationList = []
 
     for currentArticle in newsApiJson["articles"]:
-        newArticleInformation = ArticleInformation(currentArticle["title"], currentArticle["url"], currentArticle["description"], currentArticle["author"], currentArticle["urlToImage"], currentArticle["publishedAt"], currentArticle["source"]["name"])
+        newArticleInformation = ArticleInformation(
+            currentArticle["title"], 
+            currentArticle["url"], 
+            currentArticle["description"], 
+            currentArticle["author"], 
+            currentArticle["urlToImage"], 
+            currentArticle["publishedAt"], 
+            currentArticle["source"]["name"]
+            )
         articleInformationList.append(newArticleInformation)
 
     return articleInformationList
 
 def SummarizeArticleList(articleInformationList):
-
     for currentArticle in articleInformationList:
         smmryResponse = SmmryAPIGet(currentArticle.url, smmryApiKey)
         currentArticle.summarizedContent = smmryResponse["sm_api_content"]
@@ -134,9 +146,9 @@ def SummarizeArticleList(articleInformationList):
     return
 
 def ReadInFile(filename):
-    f = open(os.getcwd() + filename, "r")
-    fileAsString = f.read()
-    f.close()
+    file = open(os.getcwd() + filename, "r")
+    fileAsString = file.read()
+    file.close()
     return fileAsString
 
 def GenerateCardFromArticleInformation(articleInformation):
@@ -152,17 +164,25 @@ def GenerateCardFromArticleInformation(articleInformation):
     day = date.day
     month = calendar.month_name[date.month]
 
-    renderedCardHTML = renderer.render(preParsed,{'url' : articleInformation.url}, {'title' : articleInformation.title}, {'source' : articleInformation.source}, {'content' : content}, {'day' : day}, {'month' : month}, {'imageUrl' : articleInformation.imageUrl})
+    renderedCardHTML = renderer.render(
+        preParsed,
+        {'url' : articleInformation.url}, 
+        {'title' : articleInformation.title}, 
+        {'source' : articleInformation.source}, 
+        {'content' : content}, {'day' : day}, 
+        {'month' : month}, 
+        {'imageUrl' : articleInformation.imageUrl}
+        )
     return renderedCardHTML
 
 def SaveToFile(path, content):
-    f = open(os.getcwd() + path, 'w')
-    f.write(content)
-    f.close()
+    file = open(os.getcwd() + path, 'w')
+    file.write(content)
+    file.close()
     return
 
 def InsertCardIntoHTMLDoc(card, more = False):
-    path = "/html/main.html"
+    path = "/html/tl-dr.html"
     htmlFile = ReadInFile(path)
     renderer = pystache.Renderer()
     preParsed = pystache.parse(htmlFile)
@@ -173,15 +193,15 @@ def InsertCardIntoHTMLDoc(card, more = False):
     else:
         renderedHTML = renderer.render(preParsed, {'card' : card})
     
-    SaveToFile('/html/main.html', renderedHTML)
+    SaveToFile('/html/tl-dr.html', renderedHTML)
 
 def initHTML():
     newHTML = "<html>\n<head><title>TL-DR</title>\n<link href=\"style.css\" rel=\"stylesheet\"/>\n<body>\n{{{card}}}\n</body>"
-    SaveToFile('/html/main.html', newHTML)
+    SaveToFile('/html/tl-dr.html', newHTML)
     return
 
 def OpenInWebBrowser():
-    webbrowser.open_new_tab(os.getcwd() + '/html/main.html')
+    webbrowser.open_new_tab(os.getcwd() + '/html/tl-dr.html')
 
 def GetArticlesAndGenerateHtml():
     articleInformationList = GetArticleInformationList()

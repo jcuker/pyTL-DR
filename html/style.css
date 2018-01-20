@@ -1,104 +1,111 @@
 /*<!-- card style from https://codepen.io/IMarty/pen/zrdYGe-->*/
 
 @import url(https://fonts.googleapis.com/css?family=Roboto);
-
 body {
-  background-color: #37474F;
-  font-family: "Roboto", sans-serif;
+    background-color: #37474F;
+    font-family: "Roboto", sans-serif;
 }
+
 
 /* The card */
+
 .card {
-  position: relative;
-  height: 550px;
-  width: 900px;
-  margin: 200px auto;
-  text-overflow: ellipsis;
-  background-color: #607D8B;;
-  -webkit-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+    position: relative;
+    height: 550px;
+    width: 900px;
+    margin: 200px auto;
+    text-overflow: ellipsis;
+    background-color: #607D8B;
+    -webkit-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
 }
 
+
 /* Image on the left side */
+
 .thumbnail {
-  float: left;
-  position: relative;
-  left: 30px;
-  height: 400px;
-  width: 350px;
-  overflow: hidden;
-  top: -37px;
+    float: left;
+    position: relative;
+    left: 30px;
+    height: 400px;
+    width: 350px;
+    overflow: hidden;
+    top: -37px;
 }
 
 img.left {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height: auto;
-  width: 100%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: auto;
+    width: 100%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
+
 /* Right side of the card */
+
 .right {
-  margin-left: 400px;
-  margin-right: 20px;
+    margin-left: 400px;
+    margin-right: 20px;
 }
 
 h1 {
-  padding-top: 15px;
-  font-size: 1.3rem;
-  text-align: justify;
-  color: #4B4B4B;
+    padding-top: 15px;
+    font-size: 1.3rem;
+    text-align: justify;
+    color: #4B4B4B;
 }
 
 .source {
-  background-color: #9ECAFF;
-  height: 30px;
-  width: 150px;
-  border-radius: 20px;
+    background-color: #9ECAFF;
+    height: 30px;
+    width: 150px;
+    border-radius: 20px;
 }
 
 h2 {
-  padding-top: 8px;
-  text-align: center;
-  font-size: 0.8rem;
+    padding-top: 8px;
+    text-align: center;
+    font-size: 0.8rem;
 }
 
 .separator {
-  margin-top: 10px;
-  border: 1px solid #C3C3C3;
+    margin-top: 10px;
+    border: 1px solid #C3C3C3;
 }
 
-a{
+a {
     text-align: justify;
     color: #0041a7
 }
 
 p {
-  text-align: justify;
-  padding-top: 10px;
-  font-size: 0.95rem;
-  line-height: 170%;
-  color: #000;
+    text-align: justify;
+    padding-top: 10px;
+    font-size: 0.95rem;
+    line-height: 170%;
+    color: #000;
 }
 
+
 /* DATE of release */
+
 h5 {
-  position: absolute;
-  left: 30px;
-  bottom: -120px;
-  font-size: 6rem;
-  color: #C3C3C3;
+    position: absolute;
+    left: 30px;
+    bottom: -120px;
+    font-size: 6rem;
+    color: #C3C3C3;
 }
 
 h6 {
-  position: absolute;
-  left: 30px;
-  bottom: -55px;
-  font-size: 2rem;
-  color: #C3C3C3;
+    position: absolute;
+    left: 30px;
+    bottom: -55px;
+    font-size: 2rem;
+    color: #C3C3C3;
 }

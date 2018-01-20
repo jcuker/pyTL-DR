@@ -190,7 +190,6 @@ def main():
     InsertCardIntoHTMLDoc(card, True)
     InsertCardIntoHTMLDoc(card)
 
-
     OpenInWebBrowser()
     return
 

@@ -13,7 +13,7 @@ class ArticleInformation(object):
 
     summarizedContent = None
 
-    def __init__(self, title, url, content, author, imageUrl, publishedAt):
+    def __init__(self, title, url, content, author, imageUrl, publishedAt, source):
         if title is None:
             title = 'N/A'
         
@@ -32,12 +32,16 @@ class ArticleInformation(object):
         if publishedAt is None:
             publishedAt = 'N/A'
         
+        if source is None:
+            source = "N/A"
+
         self.title = title
         self.url = url
         self.content = content
         self.author = author
         self.imageUrl = imageUrl
         self.publishedAt = publishedAt
+        self.source = source
 
     def print(self):
         print("Title: " + self.title)
@@ -48,6 +52,8 @@ class ArticleInformation(object):
         print("Author: " + self.author)
         print("ImageUrl: " + self.imageUrl)
         print("PublishedAt: " + self.publishedAt)
+        if self.source is not None:
+            print("Source: " + self.source)
         print('\n')
 
 def initKeys():
@@ -114,7 +120,7 @@ def GetArticleInformationList():
     articleInformationList = []
 
     for currentArticle in newsApiJson["articles"]:
-        newArticleInformation = ArticleInformation(currentArticle["title"], currentArticle["url"], currentArticle["description"], currentArticle["author"], currentArticle["urlToImage"], currentArticle["publishedAt"])
+        newArticleInformation = ArticleInformation(currentArticle["title"], currentArticle["url"], currentArticle["description"], currentArticle["author"], currentArticle["urlToImage"], currentArticle["publishedAt"], currentArticle["source"]["name"])
         articleInformationList.append(newArticleInformation)
 
     return articleInformationList
@@ -146,7 +152,7 @@ def GenerateCardFromArticleInformation(articleInformation):
     day = date.day
     month = calendar.month_name[date.month]
 
-    renderedCardHTML = renderer.render(preParsed,{'url' : articleInformation.url}, {'title' : articleInformation.title}, {'author' : articleInformation.author}, {'content' : content}, {'day' : day}, {'month' : month}, {'imageUrl' : articleInformation.imageUrl})
+    renderedCardHTML = renderer.render(preParsed,{'url' : articleInformation.url}, {'title' : articleInformation.title}, {'source' : articleInformation.source}, {'content' : content}, {'day' : day}, {'month' : month}, {'imageUrl' : articleInformation.imageUrl})
     return renderedCardHTML
 
 def SaveToFile(path, content):

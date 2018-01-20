@@ -177,19 +177,20 @@ def initHTML():
 def OpenInWebBrowser():
     webbrowser.open_new_tab(os.getcwd() + '/html/main.html')
 
+def GetArticlesAndGenerateHtml():
+    articleInformationList = GetArticleInformationList()
+    for articleInformation in articleInformationList:
+        card = GenerateCardFromArticleInformation(articleInformation)
+        if articleInformation != articleInformationList[len(articleInformationList) - 1]:
+            InsertCardIntoHTMLDoc(card, True)
+        else:
+            InsertCardIntoHTMLDoc(card)
+    return
+
 def main():
     initKeys()
     initHTML()
-    articleInformationList = GetArticleInformationList()
-
-    #smmryResponse = SmmryAPIGet(articleInformationList[0].url, smmryApiKey)
-    articleInformationList[0].summarizedContent = "A group of gunmen have launched an attack on the Intercontinental Hotel in Kabul, authorities said Saturday. Interior ministry spokesman Nasrat Rahimi told CBS News that they believe four gunmen attacked the hotel. Rahimi did not provide details on casualties but said foreign and Afghan guests were inside the hotel during the attack. The attackers entered the hotel through its garden and then through the kitchen, Danish said, adding that the hotel's security was recently handed over to a private security company, but did not provide its name. \"We are aware of reports that extremist groups may be planning an attack against hotels in Kabul,\" the warning read. The Intercontinental Hotel is typically used for conferences and gatherings. In 2011, an attack at the hotel left 21 people dead, including nine attackers. A guest hiding in his hotel room told AFP he could hear the gunfire."
-
-    articleInformationList[0].print()
-    card = GenerateCardFromArticleInformation(articleInformationList[0])
-    InsertCardIntoHTMLDoc(card, True)
-    InsertCardIntoHTMLDoc(card)
-
+    GetArticlesAndGenerateHtml()
     OpenInWebBrowser()
     return
 

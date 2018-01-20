@@ -68,7 +68,7 @@ def initKeys():
 
     return
 
-def NewsAPIGetAsJSON(country, apiKey, articleCategory = 'general'):
+def GetNewsAPIResponseAsJSON(country, apiKey, articleCategory = 'general'):
     # example response:
     #{
     #   "status": "ok",
@@ -86,7 +86,7 @@ def NewsAPIGetAsJSON(country, apiKey, articleCategory = 'general'):
     newsAPIJson = json.loads(newsAPIRequest.text)
     return newsAPIJson
 
-def NewsAPIGetAsJSONviaSource(source, apiKey):
+def GetNewsAPIResponseAsJSONViaSource(source, apiKey):
     # example response:
     #{
     #   "status": "ok",
@@ -121,7 +121,7 @@ def SmmryAPIGet(urlToSend, apiKey, numberOfSentences = '7'):
     return smmryJSON
 
 def GetArticleInformationList():
-    newsApiJson = NewsAPIGetAsJSON('us', newsApiKey)
+    newsApiJson = GetNewsAPIResponseAsJSON('us', newsApiKey)
     articleInformationList = []
 
     for currentArticle in newsApiJson["articles"]:
@@ -135,7 +135,6 @@ def GetArticleInformationList():
             currentArticle["source"]["name"]
             )
         articleInformationList.append(newArticleInformation)
-
     return articleInformationList
 
 def SummarizeArticleList(articleInformationList):

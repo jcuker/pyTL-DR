@@ -170,7 +170,7 @@ def GenerateCardFromArticleInformation(articleInformation):
         {'content' : content},
         {'time' : time},
         {'day' : day}, 
-        {'month' : month}, 
+        {'month' : str(month + " ")}, 
         {'imageUrl' : articleInformation.imageUrl}
         )
     return renderedCardHTML

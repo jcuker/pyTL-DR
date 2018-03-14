@@ -8,3 +8,5 @@ build/exe\.win32-3\.6/
 dist/
 
 html/tl-dr\.html
+
+test\.py

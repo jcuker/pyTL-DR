@@ -63,8 +63,13 @@ h1 {
 .source {
     background-color: #9ECAFF;
     height: 30px;
-    width: 150px;
     border-radius: 20px;
+    margin-top: 52px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 200px;
+    margin-bottom: 10px;
 }
 
 h2 {
@@ -97,7 +102,7 @@ p {
 h5 {
     position: absolute;
     left: 30px;
-    bottom: -120px;
+    bottom: -110px;
     font-size: 6rem;
     color: #C3C3C3;
 }

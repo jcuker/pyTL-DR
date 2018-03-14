@@ -52,6 +52,17 @@ h1 {
   color: #4B4B4B;
 }
 
+.source{
+  background-color: #9ECAFF;
+  height: 30px;
+  border-radius: 20px;
+  margin-top: 52px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 200px;
+}
+
 .author {
   background-color: #9ECAFF;
   height: 30px;

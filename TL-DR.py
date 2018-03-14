@@ -112,9 +112,7 @@ def SmmryAPIGet(urlToSend, apiKey, numberOfSentences = '7'):
     #   'sm_api_limitation': 'Waited 0 extra seconds due to API Free mode, 98 requests left to make for today.'
     #}
 
-    url = 'http://api.smmry.com/?SM_API_KEY=' + apiKey 
-    + '&SM_LENGTH=' + numberOfSentences 
-    + '&SM_URL=' + urlToSend
+    url = 'http://api.smmry.com/?SM_API_KEY=' + apiKey + '&SM_LENGTH=' + numberOfSentences + '&SM_URL=' + urlToSend
 
     smmryRequest = requests.get(url)
     smmryJSON = json.loads(smmryRequest.text)
@@ -162,13 +160,16 @@ def GenerateCardFromArticleInformation(articleInformation):
     date = dateutil.parser.parse(articleInformation.publishedAt)
     day = date.day
     month = calendar.month_name[date.month]
+    time = date.strftime("%H:%M")
 
     renderedCardHTML = renderer.render(
         preParsed,
         {'url' : articleInformation.url}, 
         {'title' : articleInformation.title}, 
         {'source' : articleInformation.source}, 
-        {'content' : content}, {'day' : day}, 
+        {'content' : content},
+        {'time' : time},
+        {'day' : day}, 
         {'month' : month}, 
         {'imageUrl' : articleInformation.imageUrl}
         )
@@ -187,6 +188,7 @@ def InsertCardIntoHTMLDoc(card, more = False):
     preParsed = pystache.parse(htmlFile)
 
     renderedHTML = None
+    
     if more is True:
         renderedHTML = renderer.render(preParsed, {'card' : card + '\n\n{{{card}}}'})
     else:
@@ -204,6 +206,7 @@ def OpenInWebBrowser():
 
 def GetArticlesAndGenerateHtml():
     articleInformationList = GetArticleInformationList()
+    #SummarizeArticleList(articleInformationList)
     for articleInformation in articleInformationList:
         card = GenerateCardFromArticleInformation(articleInformation)
         if articleInformation != articleInformationList[len(articleInformationList) - 1]:

@@ -138,7 +138,12 @@ def GetArticleInformationList():
 def SummarizeArticleList(articleInformationList):
     for currentArticle in articleInformationList:
         smmryResponse = SmmryAPIGet(currentArticle.url, smmryApiKey)
-        currentArticle.summarizedContent = smmryResponse["sm_api_content"]
+        summarizedText = smmryResponse["sm_api_content"]
+
+        if len(summarizedText) >= 1860:
+            summarizedText = str(summarizedText[:1856] + " ...")
+
+        currentArticle.summarizedContent = summarizedText
     
     return
 

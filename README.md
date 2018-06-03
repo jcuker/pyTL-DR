@@ -3,3 +3,8 @@ This is a python version of my TL-DR Android project. It will get recent and tre
 
 # Credits
 I am using NewsAPI and SMMRY to get and summarize articles. 
+
+# Dependencies
+requests library
+pystache library
+python-dateutil library

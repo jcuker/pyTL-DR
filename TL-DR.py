@@ -5,6 +5,10 @@ import os
 import dateutil.parser
 import calendar
 import webbrowser
+import shutil
+from shutil import copyfile
+import argparse
+import sys
 
 class ArticleInformation(object):
 
@@ -59,11 +63,14 @@ def initKeys():
 
     global newsApiKey 
     newsApiKey = f.readline()
-    # was getting extraneous endline
-    newsApiKey = newsApiKey[:-1]
+    if (newsApiKey.endswith('\n')):
+        newsApiKey = newsApiKey[:-1]
 
     global smmryApiKey
     smmryApiKey = f.readline()
+    if(smmryApiKey.endswith('\n')):
+        smmryApiKey = smmryApiKey[:-1]
+
     f.close()
 
     return
@@ -202,7 +209,7 @@ def InsertCardIntoHTMLDoc(card, more = False):
     SaveToFile('/html/tl-dr.html', renderedHTML)
 
 def initHTML():
-    newHTML = "<html>\n<head><title>TL-DR</title>\n<link href=\"style.css\" rel=\"stylesheet\"/>\n<body>\n{{{card}}}\n</body>"
+    newHTML = "<html>\n<head><title>TL-DR</title>\n<link href=\"styles\style.css\" rel=\"stylesheet\"/>\n<body>\n{{{card}}}\n</body>"
     SaveToFile('/html/tl-dr.html', newHTML)
     return
 
@@ -211,7 +218,11 @@ def OpenInWebBrowser():
 
 def GetArticlesAndGenerateHtml():
     articleInformationList = GetArticleInformationList()
-    #SummarizeArticleList(articleInformationList)
+
+    global blnIsLocalRun
+    if( not blnIsLocalRun):
+        SummarizeArticleList(articleInformationList)
+
     for articleInformation in articleInformationList:
         card = GenerateCardFromArticleInformation(articleInformation)
         if articleInformation != articleInformationList[len(articleInformationList) - 1]:
@@ -220,11 +231,50 @@ def GetArticlesAndGenerateHtml():
             InsertCardIntoHTMLDoc(card)
     return
 
+def DeployToServer():
+    htmlLocation = os.getcwd() + "/html/tl-dr.html"
+    cssLocation = os.getcwd() + "/html/styles/style.css"
+    global destPath
+    global serverRootPath
+    destHtmlLocation = os.path.join(destPath, 'tl-dr.html')
+    destCssLocation = destPath + '/styles/style.css'
+    
+    try:
+        if (os.path.isfile(destHtmlLocation)):
+            os.remove(destHtmlLocation)
+        if (os.path.isfile(destCssLocation)):
+            os.remove(destCssLocation)
+
+        shutil.move(htmlLocation, destHtmlLocation)
+        copyfile(cssLocation, destCssLocation)
+        os.chdir(serverRootPath)
+        os.system("firebase deploy")
+    except Exception as e:
+        print(str(e))
+    return
+
+def discernRunType():
+    if(len(sys.argv) == 4 and sys.argv[1] == '-d'):
+        global destPath
+        destPath = sys.argv[2]
+        global serverRootPath
+        serverRootPath = sys.argv[3]
+        return False
+    else:
+        return True
+
 def main():
+    global blnIsLocalRun
+    blnIsLocalRun = discernRunType()
+
     initKeys()
     initHTML()
     GetArticlesAndGenerateHtml()
-    OpenInWebBrowser()
-    return
+    if (blnIsLocalRun):
+        OpenInWebBrowser()
+    else:
+        DeployToServer()
+
+    sys.exit()
 
 main()

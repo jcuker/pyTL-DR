@@ -3,6 +3,7 @@ import json
 import pystache
 import os
 import dateutil.parser
+import datetime
 import calendar
 import webbrowser
 import shutil
@@ -83,11 +84,10 @@ def GetNewsAPIResponseAsJSON(country, apiKey, articleCategory = 'general'):
     #   "articles": [ … ]
     #}
 
-    # pageSize of 10 is a limitation of the SMMRY API see here: http://smmry.com/api
     newsAPIRequest = requests.get(
         'https://newsapi.org/v2/top-headlines?country=' + country 
         + '&category=' + articleCategory 
-        + '&pageSize=10' 
+        + '&pageSize=20' 
         + '&apiKey=' + apiKey
         )
     newsAPIJson = json.loads(newsAPIRequest.text)
@@ -101,10 +101,9 @@ def GetNewsAPIResponseAsJSONViaSource(source, apiKey):
     #   "articles": [ … ]
     #}
 
-    # pageSize of 10 is a limitation of the SMMRY API see here: http://smmry.com/api
     newsAPIRequest = requests.get(
         'https://newsapi.org/v2/top-headlines?source=' + source 
-        + '&pageSize=10' 
+        + '&pageSize=20' 
         + '&apiKey=' + apiKey
         )
     newsAPIJson = json.loads(newsAPIRequest.text)
@@ -170,9 +169,23 @@ def GenerateCardFromArticleInformation(articleInformation):
         content = articleInformation.summarizedContent
 
     date = dateutil.parser.parse(articleInformation.publishedAt)
+    date = date - datetime.timedelta(hours=6)
     day = date.day
     month = calendar.month_name[date.month]
-    time = date.strftime("%H:%M")
+    time = date.strftime("%I:%M %p")
+    if (time.startswith("0")):
+        time = time[1:]
+
+    image_url = articleInformation.imageUrl + "?width=350&height=275"
+    if(image_url.startswith("https")):
+        image_url = image_url[8:]
+        image_url = "https://rsz.io/" + image_url
+    else:
+        image_url = image_url[7:]
+        image_url = "http://rsz.io/" + image_url
+
+    if (str(requests.get(image_url)) == "<Response [500]>"):
+        image_url = "bad.png"
 
     renderedCardHTML = renderer.render(
         preParsed,
@@ -183,7 +196,7 @@ def GenerateCardFromArticleInformation(articleInformation):
         {'time' : time},
         {'day' : day}, 
         {'month' : str(month + " ")}, 
-        {'imageUrl' : articleInformation.imageUrl}
+        {'imageUrl' : image_url}
         )
     return renderedCardHTML
 

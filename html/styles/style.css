@@ -14,11 +14,11 @@ body {
     height: 550px;
     width: 900px;
     margin: 200px auto;
-    text-overflow: ellipsis;
     background-color: #607D8B;
     -webkit-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 15px;
 }
 
 
@@ -28,23 +28,22 @@ body {
     float: left;
     position: relative;
     left: 30px;
-    height: 400px;
+    height: 50%;
     width: 350px;
     overflow: hidden;
-    top: -37px;
+    top: 10%;
 }
 
 img.left {
     position: absolute;
-    left: 50%;
+    /*left: 50%;
     top: 50%;
     height: auto;
     width: 100%;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 }
-
 
 /* Right side of the card */
 
@@ -58,22 +57,20 @@ h1 {
     font-size: 1.3rem;
     text-align: justify;
     color: #4B4B4B;
+    height: inherit;
 }
 
 .source {
     background-color: #9ECAFF;
-    height: 30px;
     border-radius: 20px;
-    margin-top: 320px;
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
     width: 200px;
-    margin-bottom: 10px;
+    position: absolute;
+    left: 3.5%;
+    bottom: 2.5%;
 }
 
 h2 {
-    padding-top: 8px;
     text-align: center;
     font-size: 0.8rem;
 }
@@ -92,8 +89,9 @@ p {
     text-align: justify;
     padding-top: 10px;
     font-size: 0.95rem;
-    line-height: 170%;
+    line-height: 150%;
     color: #000;
+    text-overflow: ellipsis;
 }
 
 
@@ -101,16 +99,16 @@ p {
 
 h5 {
     position: absolute;
-    left: 30px;
-    bottom: -110px;
-    font-size: 6rem;
+    left: 3.5%;
+    bottom: -55px;
+    font-size: 5rem;
     color: #C3C3C3;
 }
 
 h6 {
     position: absolute;
-    left: 30px;
-    bottom: -55px;
+    left: 3.5%;
+    bottom: -19px;
     font-size: 2rem;
     color: #C3C3C3;
 }

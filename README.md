@@ -8,3 +8,4 @@ I am using NewsAPI and SMMRY to get and summarize articles.
 requests library
 pystache library
 python-dateutil library
+pytz library

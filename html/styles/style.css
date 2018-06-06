@@ -66,9 +66,13 @@ h1 {
     text-align: justify;
     color: #4B4B4B;
     text-align: center;
-    vertical-align: middle;
     line-height: 5px;  
     margin: 0;
+    padding-left: 3.5%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    overflow: hidden;
 }
 
 .source {

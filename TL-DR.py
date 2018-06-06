@@ -87,7 +87,7 @@ def GetNewsAPIResponseAsJSON(country, apiKey, articleCategory = 'general'):
     newsAPIRequest = requests.get(
         'https://newsapi.org/v2/top-headlines?country=' + country 
         + '&category=' + articleCategory 
-        + '&pageSize=20' 
+        + '&pageSize=15' 
         + '&apiKey=' + apiKey
         )
     newsAPIJson = json.loads(newsAPIRequest.text)
@@ -103,7 +103,7 @@ def GetNewsAPIResponseAsJSONViaSource(source, apiKey):
 
     newsAPIRequest = requests.get(
         'https://newsapi.org/v2/top-headlines?source=' + source 
-        + '&pageSize=20' 
+        + '&pageSize=15' 
         + '&apiKey=' + apiKey
         )
     newsAPIJson = json.loads(newsAPIRequest.text)
@@ -147,8 +147,8 @@ def SummarizeArticleList(articleInformationList):
 
         if('sm_api_content' in smmryResponse):
             summarizedText = smmryResponse["sm_api_content"]
-            if len(summarizedText) >= 1860:
-                summarizedText = str(summarizedText[:1856] + " ...")
+            if len(summarizedText) >= 1360:
+                summarizedText = str(summarizedText[:1356] + " ...")
 
         else:
             summarizedText = None

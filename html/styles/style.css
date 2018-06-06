@@ -21,6 +21,14 @@ body {
     border-radius: 15px;
 }
 
+.card_content{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: inherit;
+    width: inherit;
+    border-radius: 15px;
+}
+
 
 /* Image on the left side */
 
@@ -31,18 +39,8 @@ body {
     height: 50%;
     width: 350px;
     overflow: hidden;
-    top: 10%;
-}
-
-img.left {
-    position: absolute;
-    /*left: 50%;
-    top: 50%;
-    height: auto;
-    width: 100%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%); */
+    top: 5%;
+    border-radius: 3px;
 }
 
 /* Right side of the card */
@@ -52,27 +50,40 @@ img.left {
     margin-right: 20px;
 }
 
+.header {
+    background-color: #9ECAFF;
+    width: inherit;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 1%;
+    height: 6.5%;
+}
+
 h1 {
-    padding-top: 15px;
+    padding-top: 1%;
+    padding-bottom: 1%;
     font-size: 1.3rem;
     text-align: justify;
     color: #4B4B4B;
-    height: inherit;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 5px;  
+    margin: 0;
 }
 
 .source {
-    background-color: #9ECAFF;
-    border-radius: 20px;
     text-align: center;
-    width: 200px;
     position: absolute;
-    left: 3.5%;
-    bottom: 2.5%;
+    left: 4%;
+    bottom: 31.5%;
 }
 
 h2 {
-    text-align: center;
     font-size: 0.8rem;
+    position: absolute;
+    left: 4%;
+    bottom: 31.5%;
+    width: 350px;
 }
 
 .separator {
@@ -81,8 +92,10 @@ h2 {
 }
 
 a {
-    text-align: justify;
-    color: #0041a7
+    width: 900px;
+    height: 550px;
+    text-decoration: none;
+    color: #000;
 }
 
 p {
@@ -100,15 +113,17 @@ p {
 h5 {
     position: absolute;
     left: 3.5%;
-    bottom: -55px;
+    bottom: 11.5%;
     font-size: 5rem;
     color: #C3C3C3;
+    width: 350px;
+    margin: 0px;
 }
 
 h6 {
     position: absolute;
-    left: 3.5%;
-    bottom: -19px;
+    left: 3.45%;
+    bottom: -11.5%;
     font-size: 2rem;
     color: #C3C3C3;
 }

@@ -1,15 +1,24 @@
 <div class="card">
-  <div class="thumbnail">
-    <img class="left" src="{{imageUrl}}" />
-  </div>
-  <div class="right">
-    <h1>
-      <a href="{{{url}}}">{{{title}}}</a>
-    </h1>
-    <div class="separator"></div>
-    <p>{{{content}}}</p>
-  </div>
-  <div class="source"><h2>{{source}}</h2></div>
-  <h5>{{time}}</h5>
-  <h6>{{month}}{{day}}</h6>
+  <a href="{{{url}}}">
+
+    <div class="card_content">
+      <div class="header">
+          <h1>{{{title}}}</h1>
+      </div>
+
+      <div class="left">
+          <div class="thumbnail">
+              <img src="{{imageUrl}}" />
+          </div>
+        <h2>{{source}}</h2>
+        <h5>{{time}}</h5>
+        <h6>{{month}}{{day}}</h6>
+      </div>
+
+      <div class="right">
+          <p>{{{content}}}</p>
+      </div>
+    </div>
+    
+  </a>
 </div>

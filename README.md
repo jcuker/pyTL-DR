@@ -1,10 +1,10 @@
 # TL-DR
-This is a python version of my TL-DR Android project. It will get recent and trending news articles from various sources and summarize their content. This is presented via a HTML page that opens in your browser, giving a nice, clean, interface to read the articles. 
+A python program that will get recent and trending news articles from various sources and summarize their content. pyTL-DR will create a HTML page that will open in your browser, giving a nice, clean, interface to read the articles. A card will be generated and inserted into the HTML document for each article present and clicking the card will take you directly to the article's source.
 
 # Credits
-I am using NewsAPI and SMMRY to get and summarize articles and icons8 for icons. 
+I am using [NewsAPI](https://newsapi.org/) and [SMMRY](https://smmry.com/) to get and summarize articles and [icons8](https://icons8.com/) for icons. 
 
 # Dependencies
-* requests
-* pystache
-* python-dateutil
+* [requests](https://github.com/requests/requests)
+* [pystache](https://github.com/defunkt/pystache)
+* [python-dateutil](https://pypi.org/project/python-dateutil/)

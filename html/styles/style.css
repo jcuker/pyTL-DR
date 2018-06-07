@@ -64,7 +64,6 @@ h1 {
     padding-bottom: 1%;
     font-size: 1.3rem;
     text-align: justify;
-    color: #4B4B4B;
     text-align: center;
     line-height: 5px;  
     margin: 0;
@@ -73,6 +72,7 @@ h1 {
     text-overflow: ellipsis;
     display: block;
     overflow: hidden;
+    width: 850px;
 }
 
 .source {
@@ -118,7 +118,7 @@ h5 {
     position: absolute;
     left: 3.5%;
     bottom: 11.5%;
-    font-size: 5rem;
+    font-size: 4.9rem;
     color: #C3C3C3;
     width: 350px;
     margin: 0px;
@@ -129,5 +129,4 @@ h6 {
     left: 3.45%;
     bottom: -11.5%;
     font-size: 2rem;
-    color: #C3C3C3;
 }

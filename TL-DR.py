@@ -87,7 +87,7 @@ def GetNewsAPIResponseAsJSON(country, apiKey, articleCategory = 'general'):
     newsAPIRequest = requests.get(
         'https://newsapi.org/v2/top-headlines?country=' + country 
         + '&category=' + articleCategory 
-        + '&pageSize=15' 
+        + '&pageSize=25' 
         + '&apiKey=' + apiKey
         )
     newsAPIJson = json.loads(newsAPIRequest.text)
@@ -103,7 +103,7 @@ def GetNewsAPIResponseAsJSONViaSource(source, apiKey):
 
     newsAPIRequest = requests.get(
         'https://newsapi.org/v2/top-headlines?source=' + source 
-        + '&pageSize=15' 
+        + '&pageSize=25' 
         + '&apiKey=' + apiKey
         )
     newsAPIJson = json.loads(newsAPIRequest.text)
@@ -226,7 +226,7 @@ def InsertCardIntoHTMLDoc(card, more = False):
     SaveToFile('/html/tl-dr.html', renderedHTML)
 
 def initHTML():
-    newHTML = "<html>\n<head><title>TL-DR</title>\n<link href=\"styles\style.css\" rel=\"stylesheet\"/>\n<body>\n{{{card}}}\n<div class=\"bottom-right\"><font class=\"foot\">Powered by News API and SMMRY</font></div></body>"
+    newHTML = "<html>\n<head><title>TL-DR</title>\n<link href=\"styles\style.css\" rel=\"stylesheet\"/>\n<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>\n<script src=\"script.js\"></script>\n<body>\n{{{card}}}\n<div class=\"bottom-right\"><font class=\"foot\">Powered by News API and SMMRY</font></div>\n<button class=\"back-to-top\" type=\"button\"></button></body>"
     SaveToFile('/html/tl-dr.html', newHTML)
     return
 
@@ -251,19 +251,25 @@ def GetArticlesAndGenerateHtml():
 def DeployToServer():
     htmlLocation = os.getcwd() + "/html/tl-dr.html"
     cssLocation = os.getcwd() + "/html/styles/style.css"
+    jsLocation = os.getcwd() + "/html/script.js"
+
     global destPath
     global serverRootPath
     destHtmlLocation = os.path.join(destPath, 'tl-dr.html')
     destCssLocation = destPath + '/styles/style.css'
-    
+    destJsLocation = os.path.join(destPath, 'script.js')
+
     try:
         if (os.path.isfile(destHtmlLocation)):
             os.remove(destHtmlLocation)
         if (os.path.isfile(destCssLocation)):
             os.remove(destCssLocation)
+        if(os.path.isfile(destJsLocation)):
+            os.remove(destJsLocation)
 
         shutil.move(htmlLocation, destHtmlLocation)
         copyfile(cssLocation, destCssLocation)
+        copyfile(jsLocation, destJsLocation)
         os.chdir(serverRootPath)
         os.system("firebase deploy")
     except Exception as e:

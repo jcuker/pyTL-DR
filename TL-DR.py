@@ -226,7 +226,7 @@ def InsertCardIntoHTMLDoc(card, more = False):
     SaveToFile('/html/tl-dr.html', renderedHTML)
 
 def initHTML():
-    newHTML = "<html>\n<head><title>TL-DR</title>\n<link href=\"styles\style.css\" rel=\"stylesheet\"/>\n<body>\n{{{card}}}\n</body>"
+    newHTML = "<html>\n<head><title>TL-DR</title>\n<link href=\"styles\style.css\" rel=\"stylesheet\"/>\n<body>\n{{{card}}}\n<div class=\"bottom-right\"><font class=\"foot\">Powered by News API and SMMRY</font></div></body>"
     SaveToFile('/html/tl-dr.html', newHTML)
     return
 

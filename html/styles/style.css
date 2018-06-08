@@ -4,6 +4,7 @@
 body {
     background-color: #37474F;
     font-family: "Roboto", sans-serif;
+    margin: 0px;
 }
 
 
@@ -130,3 +131,16 @@ h6 {
     bottom: -11.5%;
     font-size: 2rem;
 }
+
+.bottom-right {
+    font-size: 10px;
+    margin-right: 5px;
+    padding-right: 5px;
+    color: #eee;
+}
+
+.foot {
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }

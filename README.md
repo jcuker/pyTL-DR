@@ -8,3 +8,4 @@ I am using [NewsAPI](https://newsapi.org/) and [SMMRY](https://smmry.com/) to ge
 * [requests](https://github.com/requests/requests)
 * [pystache](https://github.com/defunkt/pystache)
 * [python-dateutil](https://pypi.org/project/python-dateutil/)
+* [unidecode](https://pypi.org/project/Unidecode/)

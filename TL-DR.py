@@ -7,9 +7,10 @@ import datetime
 import calendar
 import webbrowser
 import shutil
-from shutil import copyfile
 import argparse
 import sys
+from shutil import copyfile
+from unidecode import unidecode
 
 class ArticleInformation(object):
 
@@ -223,11 +224,14 @@ def InsertCardIntoHTMLDoc(card, more = False):
     else:
         renderedHTML = renderer.render(preParsed, {'card' : card})
     
+    renderedHTML = unidecode(renderedHTML)
+
     SaveToFile('/html/tl-dr.html', renderedHTML)
 
 def initHTML():
-    newHTML = "<html>\n<head><title>TL-DR</title>\n<link href=\"styles\style.css\" rel=\"stylesheet\"/>\n<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>\n<script src=\"script.js\"></script>\n<body>\n{{{card}}}\n<div class=\"bottom-right\"><font class=\"foot\">Powered by News API and SMMRY</font></div>\n<button class=\"back-to-top\" type=\"button\"></button></body>"
-    SaveToFile('/html/tl-dr.html', newHTML)
+    htmlLocation = '/html/template.html'
+    htmlTemplate = ReadInFile(htmlLocation)
+    SaveToFile('/html/tl-dr.html', htmlTemplate)
     return
 
 def OpenInWebBrowser():

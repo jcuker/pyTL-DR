@@ -13,6 +13,10 @@ import urllib
 from shutil import copyfile
 from unidecode import unidecode
 
+# TODO - put a header on top of the site
+# TODO - mobile friendly
+# TODO - Play around with smmry's returned sentences
+
 class ArticleInformation(object):
 
     summarizedContent = None
@@ -111,7 +115,7 @@ def GetNewsAPIResponseAsJSONViaSource(source, apiKey):
     newsAPIJson = json.loads(newsAPIRequest.text)
     return newsAPIJson
 
-def SmmryAPIGet(urlToSend, apiKey, numberOfSentences = '7'):
+def SmmryAPIGet(urlToSend, apiKey, numberOfSentences = '6'):
     # example response:
     #{
     #   'sm_api_character_count': '1015',
@@ -149,8 +153,8 @@ def SummarizeArticleList(articleInformationList):
 
         if('sm_api_content' in smmryResponse):
             summarizedText = smmryResponse["sm_api_content"]
-            if len(summarizedText) >= 1360:
-                summarizedText = str(summarizedText[:1356] + " ...")
+            if len(summarizedText) >= 1245:
+                summarizedText = str(summarizedText[:1241] + " ...")
 
         else:
             summarizedText = None
